@@ -9,7 +9,7 @@ import random
 import asyncio
 
 
-async def wait_random(max_delay: int = 10):
+async def wait_random(max_delay=10):
     """ task 0 for async project"""
     await asyncio.sleep(random.uniform(0, max_delay))
     return random.uniform(0, max_delay)
