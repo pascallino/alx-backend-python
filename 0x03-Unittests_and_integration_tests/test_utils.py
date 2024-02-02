@@ -39,7 +39,7 @@ class TestAccessNestedMap(unittest.TestCase):
         mock_response.json.return_value = test_payload
 
         # Patch requests.get to return the mock_response
-        with patch('utils.requests.get',
+        with patch('requests.get',
                    return_value=mock_response) as mock_get:
             # Call the get_json function
             result = get_json(test_url)
