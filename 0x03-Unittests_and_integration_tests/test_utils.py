@@ -35,8 +35,6 @@ class TestAccessNestedMap(unittest.TestCase):
     ])
     def test_get_json(self, test_url, test_payload):
         """Tests the `get_json` function."""
-        # Create a Mock object with a json method that returns the test_payload
-        # Patch requests.get to return the mock_response
         attrs = {'json.return_value': test_payload}
         with patch('requests.get',
                    return_value=Mock(**attrs)) as mock_get:
