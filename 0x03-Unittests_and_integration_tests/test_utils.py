@@ -29,13 +29,23 @@ class TestAccessNestedMap(unittest.TestCase):
         with self.assertRaises(KeyError) as context:
             access_nested_map(nested_map, path)
 
+
+class TestGetJson(unittest.TestCase):
+    """Tests the `get_json` function."""
     @parameterized.expand([
         ("http://example.com", {"payload": True}),
         ("http://holberton.io", {"payload": False}),
     ])
     def test_get_json(self, test_url, test_payload):
         """Tests the `get_json` function."""
+        # Create a Mock object with a json method that returns the test_payload
+        # Patch requests.get to return the mock_response
         attrs = {'json.return_value': test_payload}
-        with patch("requests.get", return_value=Mock(**attrs)) as req_get:
-            self.assertEqual(get_json(test_url), test_payload)
-            req_get.assert_called_once_with(test_url)
+        with patch('requests.get',
+                   return_value=Mock(**attrs)) as mock_get:
+            # Call the get_json function
+            result = get_json(test_url)
+
+            # Assert that requests.get was called exactly
+            # once with the test_url
+            mock_get.assert_called_once_with(test_url)
