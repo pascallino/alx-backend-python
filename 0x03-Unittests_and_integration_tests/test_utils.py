@@ -69,7 +69,7 @@ class TestMemoize(unittest.TestCase):
 
         # Mock the a_method using patch
         with patch.object(TestClass, "a_method",
-                          return_value=lambda: 42,) as mock_a_method:
+                          return_value=lambda: 42) as mock_a_method:
             test_instance = TestClass()
             # Call a_property twice
             result1 = test_instance.a_property()
