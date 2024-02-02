@@ -2,6 +2,7 @@
 """ testing parameterized unit test for nested map"""
 import unittest
 from parameterized import parameterized
+from typing import Dict, Tuple, Union
 from utils import access_nested_map  # Assuming utils module is available
 
 
@@ -21,7 +22,12 @@ class TestAccessNestedMap(unittest.TestCase):
         ({}, ("a",), "KeyError: 'a'"),
         ({"a": 1}, ("a", "b"), "KeyError: 'b'"),
     ])
-    def test_access_nested_map_exception(self, nested_map, path, message):
-        """ test with assert raises error to see if the error message match """
-        with self.assertRaises(message) as context:
+    def test_access_nested_map_exception(
+            self,
+            nested_map: Dict,
+            path: Tuple[str],
+            exception: Exception,
+            ) -> None:
+        """Tests `access_nested_map`'s exception raising."""
+        with self.assertRaises(exception):
             access_nested_map(nested_map, path)
